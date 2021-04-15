@@ -1,10 +1,12 @@
-package com.kosteklvp;
+package com.kosteklvp.table;
 
 import lombok.AllArgsConstructor;
 
 public interface TableHeading {
 
   public String getName();
+
+  public Align getAlign();
 
   @AllArgsConstructor
   public enum Align {
@@ -18,7 +20,5 @@ public interface TableHeading {
       return code;
     }
   }
-
-  public Align getAlign();
 
 }

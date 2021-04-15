@@ -1,4 +1,4 @@
-package com.kosteklvp;
+package com.kosteklvp.table;
 
 import java.util.List;
 
@@ -19,39 +19,53 @@ public class Table {
 
   public String generate() {
     if (CollectionUtils.isEmpty(headings)) {
-      throw new RuntimeException("Headings are not set.");
+      throw new HeadingsNotSetException();
     }
 
     final StringBuilder tableText = new StringBuilder();
-    tableText.append("&#x200B;").append("\n").append("\n");
+
+    addBeginning(tableText);
 
     addHeadings(tableText);
-    tableText.append("\n");
 
     addColumnsAlign(tableText);
-    tableText.append("\n");
 
-    addRows(tableText);
+    if (CollectionUtils.isNotEmpty(rows)) {
+      addRows(tableText);
+    }
+
+    addEnding(tableText);
 
     return tableText.toString();
 
   }
 
+  private void addBeginning(StringBuilder tableText) {
+    tableText.append("&#x200B;").append("\n").append("\n");
+  }
+
   private void addHeadings(StringBuilder tableText) {
     tableText.append("|");
     headings.forEach(heading -> tableText.append(heading.getName()).append("|"));
+    tableText.append("\n");
   }
 
   private void addColumnsAlign(StringBuilder tableText) {
     tableText.append("|");
     headings.forEach(heading -> tableText.append(heading.getAlign().get()).append("|"));
+    tableText.append("\n");
   }
 
   private void addRows(StringBuilder tableText) {
-    for (TableRow row : rows) {
+    rows.forEach(row -> {
       tableText.append("|");
+      row.getValues().forEach(value -> tableText.append(value).append("|"));
+      tableText.append("\n");
+    });
+  }
 
-    }
+  private void addEnding(StringBuilder tableText) {
+    tableText.append("\n").append("\n").append("&#x200B;");
   }
 
 }

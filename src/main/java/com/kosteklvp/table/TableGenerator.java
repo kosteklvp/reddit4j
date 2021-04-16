@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Table {
+public class TableGenerator {
 
   private List<TableHeading> headings;
 

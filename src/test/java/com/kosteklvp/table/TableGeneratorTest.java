@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import com.kosteklvp.table.DataFactoryTable.PersonRow;
 
-class TableTest {
+class TableGeneratorTest {
 
   @Test
   void generatesTable() {
@@ -32,33 +32,33 @@ class TableTest {
       rows.add(personRow);
     }
 
-    Table table = Table.builder()
+    TableGenerator tableGenerator = TableGenerator.builder()
         .headings(DataFactoryTable.PersonTableHeading.getAll())
         .rows(rows)
         .build();
 
-    String generatedTableText = table.generate();
+    String generatedTableText = tableGenerator.generate();
 
     assertThat(generatedTableText, is(DataFactoryTable.getPersonTableText()));
   }
 
   @Test
-  void generatesEmptyTableWhenRowsAreEmpty() {
-    Table table = Table.builder()
+  void generatesEmptyTableWhenRowsAreNotSet() {
+    TableGenerator tableGenerator = TableGenerator.builder()
         .headings(DataFactoryTable.PersonTableHeading.getAll())
         .build();
 
-    String generatedTableText = table.generate();
+    String generatedTableText = tableGenerator.generate();
 
     assertThat(generatedTableText, is(DataFactoryTable.getEmptyPersonTableText()));
   }
 
   @Test
   void throwsExceptionWhenHeadingsAreNotSet() {
-    Table table = new Table();
+    TableGenerator tableGenerator = new TableGenerator();
 
     Assertions.assertThrows(HeadingsNotSetException.class, () -> {
-      table.generate();
+      tableGenerator.generate();
     });
   }
 

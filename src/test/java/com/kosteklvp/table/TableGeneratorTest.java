@@ -1,7 +1,7 @@
 package com.kosteklvp.table;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

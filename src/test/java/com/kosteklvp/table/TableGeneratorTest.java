@@ -26,7 +26,7 @@ class TableGeneratorTest {
           .lastName(dataFactory.getLastName())
           .city(dataFactory.getCity())
           .email(dataFactory.getEmailAddress())
-          .birthDate(new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(dataFactory.getBirthDate()))
+          .birthDate(new SimpleDateFormat("MM/dd/yyyy").format(dataFactory.getBirthDate()))
           .build();
 
       rows.add(personRow);
